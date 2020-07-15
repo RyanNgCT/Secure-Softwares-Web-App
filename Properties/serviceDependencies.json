@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ssd_assignment_team1_draft1Context"
+    }
+  }
+}

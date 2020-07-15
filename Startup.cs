@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using ssd_assignment_team1_draft1.Models;
 
 namespace ssd_assignment_team1_draft1
 {
@@ -29,6 +32,11 @@ namespace ssd_assignment_team1_draft1
 
             services.AddDbContext<ssd_assignment_team1_draft1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ssd_assignment_team1_draft1Context")));
+            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
+       .AddDefaultUI()
+        .AddEntityFrameworkStores<ssd_assignment_team1_draft1Context>()
+        .AddDefaultTokenProviders();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +55,7 @@ namespace ssd_assignment_team1_draft1
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
