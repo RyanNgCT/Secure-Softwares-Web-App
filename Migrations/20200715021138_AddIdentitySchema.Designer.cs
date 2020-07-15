@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ssd_assignment_team1_draft1.Data;
 
 namespace ssd_assignment_team1_draft1.Migrations
 {
     [DbContext(typeof(ssd_assignment_team1_draft1Context))]
-    partial class ssd_assignment_team1_draft1ContextModelSnapshot : ModelSnapshot
+    [Migration("20200715021138_AddIdentitySchema")]
+    partial class AddIdentitySchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

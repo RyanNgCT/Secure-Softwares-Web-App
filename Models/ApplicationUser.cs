@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace ssd_assignment_team1_draft1.Models
 {
-    public class ApplicationUser
-    {
-    }
+        public class ApplicationUser : IdentityUser
+        {
+            public string FullName { get; set; }
+            public DateTime BirthDate { get; set; }
+            public int Age { get; set; }
+        }
 }
