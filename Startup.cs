@@ -32,10 +32,36 @@ namespace ssd_assignment_team1_draft1
 
             services.AddDbContext<ssd_assignment_team1_draft1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ssd_assignment_team1_draft1Context")));
-            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
-       .AddDefaultUI()
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultUI()
         .AddEntityFrameworkStores<ssd_assignment_team1_draft1Context>()
         .AddDefaultTokenProviders();
+
+            services.AddMvc()
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Softwares");
+            });
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 7;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(7);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
 
         }
 
