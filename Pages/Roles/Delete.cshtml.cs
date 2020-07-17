@@ -8,15 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ssd_assignment_team1_draft1.Models;
 
-namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
+namespace ssd_assignment_team1_draft1.Pages.Roles
 {
     [Authorize(Roles = "Admin")]
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-
-        public EditModel(RoleManager<ApplicationRole> roleManager)
+        public DeleteModel(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
@@ -40,29 +39,19 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            ApplicationRole appRole = await _roleManager.FindByIdAsync(ApplicationRole.Id);
+            ApplicationRole = await _roleManager.FindByIdAsync(id);
+            IdentityResult roleRuslt = await _roleManager.DeleteAsync(ApplicationRole);
 
-            appRole.Id = ApplicationRole.Id;
-            appRole.Name = ApplicationRole.Name;
-            appRole.Description = ApplicationRole.Description;
-
-            IdentityResult roleRuslt = await _roleManager.UpdateAsync(appRole);
-
-            if (roleRuslt.Succeeded)
-            {
-                return RedirectToPage("./Index");
-
-            }
             return RedirectToPage("./Index");
-        }
 
+        }
     }
 
 }
