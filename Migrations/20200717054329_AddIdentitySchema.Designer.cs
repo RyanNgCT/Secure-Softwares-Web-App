@@ -10,8 +10,8 @@ using ssd_assignment_team1_draft1.Data;
 namespace ssd_assignment_team1_draft1.Migrations
 {
     [DbContext(typeof(ssd_assignment_team1_draft1Context))]
-    [Migration("20200715063418_AddIdentityRole")]
-    partial class AddIdentityRole
+    [Migration("20200717054329_AddIdentitySchema")]
+    partial class AddIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
