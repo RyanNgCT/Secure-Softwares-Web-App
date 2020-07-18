@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 {
+    [Authorize(Roles = "Admin, Users")]
     public class ManageModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
@@ -86,6 +88,19 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
             IdentityResult roleResult = await _userManager.AddToRoleAsync(AppUser, AppRole.Name);
 
+            // Create an auditrecord object
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Allocated a Role (Username: " + selectedusername.ToString() + " Role: " + selectedrolename.ToString() + ")";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
+            _context.AuditRecords.Add(auditrecord);
+            await _context.SaveChangesAsync();
+
+
             if (roleResult.Succeeded)
             {
                 TempData["message"] = "Role added to this user successfully";
@@ -103,7 +118,7 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
                 return RedirectToPage("Manage");
             }
 
-            ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(delusername, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(delusername)).FirstOrDefault();
 
             if (await _userManager.IsInRoleAsync(user, delrolename))
             {
@@ -111,6 +126,20 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
                 TempData["message"] = "Role removed from this user successfully";
             }
+
+            // Create an auditrecord object
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Deallocated a Role (Username: " + delusername.ToString() + " Role: " + delrolename.ToString() + ")";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
+            _context.AuditRecords.Add(auditrecord);
+            await _context.SaveChangesAsync();
+
+
 
             return RedirectToPage("Manage");
         }

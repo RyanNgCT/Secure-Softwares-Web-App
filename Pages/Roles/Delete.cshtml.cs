@@ -49,19 +49,21 @@ namespace ssd_assignment_team1_draft1.Pages.Roles
                 return NotFound();
             }
 
+            ApplicationRole = await _roleManager.FindByIdAsync(id);
+            IdentityResult roleRuslt = await _roleManager.DeleteAsync(ApplicationRole);
+
+
             // Create an auditrecord object
             var auditrecord = new AuditRecord();
-            auditrecord.AuditActionType = "Deleted a Role";
+            auditrecord.AuditActionType = "Deleted a Role (Role: " + ApplicationRole.ToString() + ")";
             auditrecord.DateTimeStamp = DateTime.Now;
             auditrecord.KeySoftwareFieldID = 0;
             // Get current logged-in user
             var userID = User.Identity.Name.ToString();
             auditrecord.Username = userID;
 
-            ApplicationRole = await _roleManager.FindByIdAsync(id);
-            IdentityResult roleRuslt = await _roleManager.DeleteAsync(ApplicationRole);
-
-            
+            _context.AuditRecords.Add(auditrecord);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
 

@@ -42,7 +42,7 @@ namespace ssd_assignment_team1_draft1
             {
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add Software Record";
+                auditrecord.AuditActionType = "Add Software Record (Software: " + Software.Name +")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = Software.ID;
                 // Get current logged-in user

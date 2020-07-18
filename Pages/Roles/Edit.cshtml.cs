@@ -14,11 +14,13 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
     public class EditModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
-
-        public EditModel(RoleManager<ApplicationRole> roleManager)
+        public EditModel(RoleManager<ApplicationRole> roleManager,
+                         ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -55,11 +57,25 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
             IdentityResult roleRuslt = await _roleManager.UpdateAsync(appRole);
 
+            // Create an auditrecord object
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Edited a Role (Role: " + ApplicationRole.ToString() + ")";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
+            _context.AuditRecords.Add(auditrecord);
+            await _context.SaveChangesAsync();
+
+
             if (roleRuslt.Succeeded)
             {
                 return RedirectToPage("./Index");
 
             }
+
             return RedirectToPage("./Index");
         }
 

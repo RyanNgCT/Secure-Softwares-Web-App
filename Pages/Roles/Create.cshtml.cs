@@ -45,7 +45,7 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
             // Create an auditrecord object
             var auditrecord = new AuditRecord();
-            auditrecord.AuditActionType = "Add New Role";
+            auditrecord.AuditActionType = "Added New Role (Role: " + ApplicationRole.ToString() + ")";
             auditrecord.DateTimeStamp = DateTime.Now;
             auditrecord.KeySoftwareFieldID = 0;
             // Get current logged-in user

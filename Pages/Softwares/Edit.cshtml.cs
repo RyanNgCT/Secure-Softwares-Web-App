@@ -53,7 +53,7 @@ namespace ssd_assignment_team1_draft1
             try
             {
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Edit Software Record";
+                auditrecord.AuditActionType = "Edit Software Record (Software: " + Software.Name +")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = Software.ID;
                 var userID = User.Identity.Name.ToString();

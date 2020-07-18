@@ -24,17 +24,20 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -95,6 +98,8 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
