@@ -52,6 +52,13 @@ namespace ssd_assignment_team1_draft1
 
             try
             {
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Edit Software Record";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeySoftwareFieldID = Software.ID;
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

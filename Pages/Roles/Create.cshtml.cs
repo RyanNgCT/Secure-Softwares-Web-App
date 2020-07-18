@@ -14,10 +14,13 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
     public class CreateModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
-        public CreateModel(RoleManager<ApplicationRole> roleManager)
+        public CreateModel(RoleManager<ApplicationRole> roleManager, 
+                           ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _roleManager = roleManager;
+            _context = context;
         }
 
         public IActionResult OnGet()
@@ -39,6 +42,19 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
             ApplicationRole.IPAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
             IdentityResult roleRuslt = await _roleManager.CreateAsync(ApplicationRole);
+
+            // Create an auditrecord object
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Add New Role";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
+            _context.AuditRecords.Add(auditrecord);
+            await _context.SaveChangesAsync();
+
 
             return RedirectToPage("Index");
         }

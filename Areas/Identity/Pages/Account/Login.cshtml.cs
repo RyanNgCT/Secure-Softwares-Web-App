@@ -21,14 +21,16 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
             ILogger<LoginModel> logger, 
+            ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context,
             UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -84,8 +86,34 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    // Login successful attempt - create an audit record
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Successful Login";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeySoftwareFieldID = 0;
+                    // 0 – dummy record (no software is affected during login)
+
+                    auditrecord.Username = Input.Email;
+                    // save the email used for the failed login
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
                     return LocalRedirect(returnUrl);
                 }
+                else
+                {
+                    // Login failed attempt - create an audit record
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Failed Login";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeySoftwareFieldID = 0;
+                    // 0 – dummy record (no software is affected during login)
+
+                    auditrecord.Username = Input.Email;
+                    // save the email used for the failed login
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+                }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });

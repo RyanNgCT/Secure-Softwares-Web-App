@@ -14,10 +14,13 @@ namespace ssd_assignment_team1_draft1.Pages.Roles
     public class DeleteModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
-        public DeleteModel(RoleManager<ApplicationRole> roleManager)
+        public DeleteModel(RoleManager<ApplicationRole> roleManager,
+                           ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -46,8 +49,19 @@ namespace ssd_assignment_team1_draft1.Pages.Roles
                 return NotFound();
             }
 
+            // Create an auditrecord object
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Deleted a Role";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
             ApplicationRole = await _roleManager.FindByIdAsync(id);
             IdentityResult roleRuslt = await _roleManager.DeleteAsync(ApplicationRole);
+
+            
 
             return RedirectToPage("./Index");
 

@@ -56,7 +56,7 @@ namespace ssd_assignment_team1_draft1
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Delete Movie Record";
+                    auditrecord.AuditActionType = "Delete Software Record";
                     auditrecord.DateTimeStamp = DateTime.Now;
                     auditrecord.KeySoftwareFieldID = Software.ID;
                     var userID = User.Identity.Name.ToString();
