@@ -52,10 +52,22 @@ namespace ssd_assignment_team1_draft1
             if (Software != null)
             {
                 _context.Software.Remove(Software);
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Delete Movie Record";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeySoftwareFieldID = Software.ID;
+                    var userID = User.Identity.Name.ToString();
+                    auditrecord.Username = userID;
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+
+                }
             }
 
-            return RedirectToPage("./Index");
+                return RedirectToPage("./Index");
+            }
         }
-    }
 }

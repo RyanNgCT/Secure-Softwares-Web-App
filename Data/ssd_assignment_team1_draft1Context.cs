@@ -22,5 +22,6 @@ namespace ssd_assignment_team1_draft1.Data
 
 
         public DbSet<ssd_assignment_team1_draft1.Models.Software> Software { get; set; }
+        public DbSet<ssd_assignment_team1_draft1.Models.AuditRecord> AuditRecords { get; set; }
     }
 }

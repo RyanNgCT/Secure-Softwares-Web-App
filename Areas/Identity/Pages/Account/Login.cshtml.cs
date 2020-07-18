@@ -23,7 +23,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
-            ILogger<LoginModel> logger,
+            ILogger<LoginModel> logger, 
             UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -90,6 +90,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
