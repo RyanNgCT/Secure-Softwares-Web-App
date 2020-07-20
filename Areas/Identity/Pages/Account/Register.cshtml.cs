@@ -88,6 +88,16 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Registration successful - create an audit record
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Registration of Account";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeySoftwareFieldID = 0;
+                    // 0 – dummy record (no software is affected during login)
+                    auditrecord.Username = Input.Email;
+                    _context.AuditRecords.Add(auditrecord);
+
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -98,8 +108,6 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

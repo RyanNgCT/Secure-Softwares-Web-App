@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{searchString?}"
 @model ssd_assignment_team1_draft1.Pages.Audit.IndexModel
 
 @{
@@ -10,6 +10,21 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        Audit Action: <select asp-for="AuditAction">
+            <option value="">All</option>
+            <option value="Login">Login</option>
+            <option value="Logout">Logout</option>
+            <option value="Software">Add/Edit/Delete Software Record</option>
+            <option value="Role">Add/Edit/Delete/Manage Role</option>
+            <option value="llocated a Role">Allocate/Deallocate Role</option>
+        </select>
+        User Email: <input type="text" asp-for="SearchName" />
+        SoftwareID: <input type="number" asp-for="SearchSoftwareID" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
