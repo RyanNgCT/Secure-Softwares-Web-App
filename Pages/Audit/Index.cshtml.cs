@@ -39,6 +39,7 @@ namespace ssd_assignment_team1_draft1.Pages.Audit
 
             var auditRecords = from a in _context.AuditRecords
                                select a;
+            
             if (!string.IsNullOrEmpty(SearchName))
             {
                 auditRecords = auditRecords.Where(s => s.Username.Contains(SearchName));
@@ -48,10 +49,10 @@ namespace ssd_assignment_team1_draft1.Pages.Audit
             {
                 auditRecords = auditRecords.Where(x => x.AuditActionType.Contains(AuditAction));
             }
-            if (!string.IsNullOrEmpty(SearchSoftwareID.ToString()))
-            {
-                auditRecords = auditRecords.Where(s => s.KeySoftwareFieldID == SearchSoftwareID);
-            }
+            //if (!string.IsNullOrEmpty(SearchSoftwareID.ToString()))
+            //{
+            //    auditRecords = auditRecords.Where(s => s.KeySoftwareFieldID == SearchSoftwareID);
+            //}
 
             AuditRecord = await auditRecords.ToListAsync();
         }

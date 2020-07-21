@@ -20,8 +20,8 @@
             <option value="Role">Add/Edit/Delete/Manage Role</option>
             <option value="llocated a Role">Allocate/Deallocate Role</option>
         </select>
-        User Email: <input type="text" asp-for="SearchName" />
-        SoftwareID: <input type="number" asp-for="SearchSoftwareID" />
+        User Email: <input type="email" asp-for="SearchName" />
+        <!--SoftwareID: <input type="text" asp-for="SearchSoftwareID" />-->
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -47,16 +47,16 @@
 @foreach (var item in Model.AuditRecord) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AuditActionType)
+                @item.AuditActionType
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @item.Username
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateTimeStamp)
+                @item.DateTimeStamp
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KeySoftwareFieldID)
+                @item.KeySoftwareFieldID
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Audit_ID">Edit</a> |
