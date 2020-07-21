@@ -53,6 +53,22 @@ namespace ssd_assignment_team1_draft1.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AuditRecords",
+                columns: table => new
+                {
+                    Audit_ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AuditActionType = table.Column<string>(maxLength: 50, nullable: false),
+                    Username = table.Column<string>(maxLength: 30, nullable: false),
+                    DateTimeStamp = table.Column<DateTime>(nullable: false),
+                    KeySoftwareFieldID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuditRecords", x => x.Audit_ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Software",
                 columns: table => new
                 {
@@ -232,6 +248,9 @@ namespace ssd_assignment_team1_draft1.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "AuditRecords");
 
             migrationBuilder.DropTable(
                 name: "Software");

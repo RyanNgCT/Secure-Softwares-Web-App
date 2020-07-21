@@ -10,8 +10,8 @@ using ssd_assignment_team1_draft1.Data;
 namespace ssd_assignment_team1_draft1.Migrations
 {
     [DbContext(typeof(ssd_assignment_team1_draft1Context))]
-    [Migration("20200717054329_AddIdentitySchema")]
-    partial class AddIdentitySchema
+    [Migration("20200721133250_AddAudit")]
+    partial class AddAudit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,6 +233,34 @@ namespace ssd_assignment_team1_draft1.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ssd_assignment_team1_draft1.Models.AuditRecord", b =>
+                {
+                    b.Property<int>("Audit_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AuditActionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DateTimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("KeySoftwareFieldID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Audit_ID");
+
+                    b.ToTable("AuditRecords");
                 });
 
             modelBuilder.Entity("ssd_assignment_team1_draft1.Models.Software", b =>
