@@ -14,9 +14,13 @@ namespace ssd_assignment_team1_draft1.Models
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+        [Display(Name = "Serial Number")]
         public int SerialNumber { get; set; }
         public string Hash { get; set; }
+        [Display(Name = "Warranty Period (in Months)")]
         public int WarrantyPeriod { get; set; }
     }
 }

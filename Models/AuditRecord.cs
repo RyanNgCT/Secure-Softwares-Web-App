@@ -12,14 +12,14 @@ namespace ssd_assignment_team1_draft1.Models
         public int Audit_ID { get; set; }
 
         [Display(Name = "Audit Action")]
-        [StringLength(50,MinimumLength = 5)]
-        //[RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
+        [StringLength(70,MinimumLength = 5)]
         [Required]
         public string AuditActionType { get; set; }
 
         [Display(Name = "Performed By")]
         [StringLength(30, MinimumLength = 5)]
-        //[RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid email.")]
+        [RegularExpression(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$", ErrorMessage = "Please enter valid email.")]
         [Required]
         public string Username { get; set; }
 

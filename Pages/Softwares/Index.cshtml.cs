@@ -20,10 +20,20 @@ namespace ssd_assignment_team1_draft1
         }
 
         public IList<Software> Software { get;set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchSoftware { get; set; }
 
         public async Task OnGetAsync()
         {
-            Software = await _context.Software.ToListAsync();
+            var softwares = from s in _context.Software
+                            select s;
+            if (!string.IsNullOrEmpty(SearchSoftware))
+            {
+                softwares = softwares.Where(s => s.Name.Contains(SearchSoftware));
+            }
+
+            Software = await softwares.ToListAsync();
+            //Software = await _context.Software.ToListAsync();
         }
     }
 }

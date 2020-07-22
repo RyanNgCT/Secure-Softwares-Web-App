@@ -27,8 +27,6 @@ namespace ssd_assignment_team1_draft1.Pages.Audit
         [BindProperty(SupportsGet = true)]
         public string AuditAction { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public int SearchSoftwareID { get; set; }
 
 
         public async Task OnGetAsync()
@@ -49,11 +47,6 @@ namespace ssd_assignment_team1_draft1.Pages.Audit
             {
                 auditRecords = auditRecords.Where(x => x.AuditActionType.Contains(AuditAction));
             }
-            //if (!string.IsNullOrEmpty(SearchSoftwareID.ToString()))
-            //{
-            //    auditRecords = auditRecords.Where(s => s.KeySoftwareFieldID == SearchSoftwareID);
-            //}
-
             AuditRecord = await auditRecords.ToListAsync();
         }
     }
