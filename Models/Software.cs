@@ -10,17 +10,25 @@ namespace ssd_assignment_team1_draft1.Models
     public class Software
     {
         public int ID { get; set; }
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
+        [Required]
         public string Name { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
+        [Required]
         public decimal Price { get; set; }
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
+        [Required]
         public DateTime ReleaseDate { get; set; }
         [Display(Name = "Serial Number")]
+        [Required]
         public int SerialNumber { get; set; }
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
+        [Required]
         public string Hash { get; set; }
         [Display(Name = "Warranty Period (in Months)")]
+        [Required]
         public int WarrantyPeriod { get; set; }
     }
 }
