@@ -24,7 +24,7 @@ namespace ssd_assignment_team1_draft1.Models
         [Display(Name = "Serial Number")]
         [Required]
         public int SerialNumber { get; set; }
-        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid hash.")]
         [Required]
         public string Hash { get; set; }
         [Display(Name = "Warranty Period (in Months)")]

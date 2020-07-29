@@ -82,7 +82,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -99,8 +99,31 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                     await _context.SaveChangesAsync();
                     return LocalRedirect(returnUrl);
                 }
+
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                }
+
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User account locked out.");
+                    // lockout- create an audit record
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Failed Login (Account Lockout)";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeySoftwareFieldID = 0;
+                    // 0 – dummy record (no software is affected during login)
+                    auditrecord.Username = Input.Email;
+                    // save the email used for the failed login
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToPage("./Lockout");
+                }
                 else
                 {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     // Login failed attempt - create an audit record
                     var auditrecord = new AuditRecord();
                     auditrecord.AuditActionType = "Failed Login";
@@ -112,21 +135,6 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                     // save the email used for the failed login
                     _context.AuditRecords.Add(auditrecord);
                     await _context.SaveChangesAsync();
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
             }
