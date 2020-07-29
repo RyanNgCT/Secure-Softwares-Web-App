@@ -13,6 +13,8 @@ using ssd_assignment_team1_draft1.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using ssd_assignment_team1_draft1.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebPWrecover.Services;
 
 namespace ssd_assignment_team1_draft1
 {
@@ -37,7 +39,11 @@ namespace ssd_assignment_team1_draft1
                 .AddDefaultUI()
         .AddEntityFrameworkStores<ssd_assignment_team1_draft1Context>()
         .AddDefaultTokenProviders();
-
+            // requires
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            // using WebPWrecover.Services;
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<Services.AuthMessageSenderOptions>(Configuration);
             services.AddMvc()
             .AddRazorPagesOptions(options =>
             {
