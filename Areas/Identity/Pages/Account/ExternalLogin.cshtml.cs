@@ -24,17 +24,20 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
         public ExternalLoginModel(
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -87,6 +90,19 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+
+                // Login successful attempt - create an audit record
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Successful Login with Google";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeySoftwareFieldID = 0;
+                // 0 – dummy record (no software is affected during login)
+
+                auditrecord.Username = info.Principal.Identity.Name;
+                // save the email used for the failed login
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
+
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -151,6 +167,18 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                         }
 
                         await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+
+                        // Login successful attempt - create an audit record
+                        var auditrecord = new AuditRecord();
+                        auditrecord.AuditActionType = "Registered with Google";
+                        auditrecord.DateTimeStamp = DateTime.Now;
+                        auditrecord.KeySoftwareFieldID = 0;
+                        // 0 – dummy record (no software is affected during login)
+
+                        auditrecord.Username = Input.Email;
+                        // save the email used for the failed login
+                        _context.AuditRecords.Add(auditrecord);
+                        await _context.SaveChangesAsync();
 
                         return LocalRedirect(returnUrl);
                     }
