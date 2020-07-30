@@ -35,7 +35,7 @@ namespace ssd_assignment_team1_draft1
             services.AddDbContext<ssd_assignment_team1_draft1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ssd_assignment_team1_draft1Context")));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddDefaultUI()
         .AddEntityFrameworkStores<ssd_assignment_team1_draft1Context>()
         .AddDefaultTokenProviders();
