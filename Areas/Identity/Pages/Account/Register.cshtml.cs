@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -12,8 +13,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using ssd_assignment_team1_draft1.Models;
+
 
 namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 {
@@ -22,7 +26,9 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration configuration;
         private readonly ILogger<RegisterModel> _logger;
+        //private readonly IHttpClientFactory _httpclientfactory;
         private readonly IEmailSender _emailSender;
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
@@ -30,14 +36,18 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
+            IConfiguration configuration,
             IEmailSender emailSender,
+            //IHttpClientFactory httpClientFactory,
             ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.configuration = configuration;
             _emailSender = emailSender;
             _context = context;
+            //_httpclientfactory = httpClientFactory;
         }
 
         [BindProperty]
@@ -76,12 +86,45 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            //string recaptchaResponse = this.Request.Form["g-recaptcha-response"];
+            //var client = _httpclientfactory.CreateClient();
+            //try
+            //{
+              //  var parameters = new Dictionary<string, string>
+            //{
+              //  {"secret", this.configuration["reCAPTCHA:SecretKey"]},
+               // {"response", recaptchaResponse},
+                //{"remoteip", this.HttpContext.Connection.RemoteIpAddress.ToString()}
+            //};
+
+              //  HttpResponseMessage response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(parameters));
+                //response.EnsureSuccessStatusCode();
+
+                //string apiResponse = await response.Content.ReadAsStringAsync();
+                //dynamic apiJson = JObject.Parse(apiResponse);
+                //if (apiJson.success != true)
+                //{
+                  //  this.ModelState.AddModelError(string.Empty, "There was an unexpected problem processing this request. Please try again.");
+                //}
+            //}
+            //catch (HttpRequestException ex)
+            //{
+                // Something went wrong with the API. Let the request through.
+              //  _logger.LogError(ex, "Unexpected error calling reCAPTCHA api.");
+            //}
+
+            //if (!ModelState.IsValid)
+            //{
+              //  return Page();
+            //}
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FullName = Input.FullName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
