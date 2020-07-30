@@ -133,13 +133,13 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 
                     // Registration successful - create an audit record
                     var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Registration of Account";
+                    auditrecord.AuditActionType = "Register Account";
                     auditrecord.DateTimeStamp = DateTime.Now;
                     auditrecord.KeySoftwareFieldID = 0;
                     // 0 – dummy record (no software is affected during login)
                     auditrecord.Username = Input.Email;
                     _context.AuditRecords.Add(auditrecord);
-
+                    await _context.SaveChangesAsync();
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

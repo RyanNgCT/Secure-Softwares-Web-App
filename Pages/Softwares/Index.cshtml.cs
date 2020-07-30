@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Data;
 using ssd_assignment_team1_draft1.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ssd_assignment_team1_draft1
 {
@@ -20,6 +21,7 @@ namespace ssd_assignment_team1_draft1
         }
 
         public IList<Software> Software { get;set; }
+        
         [BindProperty(SupportsGet = true)]
         public string SearchSoftware { get; set; }
 

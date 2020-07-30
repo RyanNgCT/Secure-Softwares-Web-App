@@ -3,6 +3,9 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "ssd_assignment_team1_draft1Context"
+    },
+    "secrets1": {
+      "type": "secrets.user"
     }
   }
 }
