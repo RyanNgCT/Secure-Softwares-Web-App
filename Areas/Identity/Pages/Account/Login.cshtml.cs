@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ssd_assignment_team1_draft1.Models;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 {
@@ -22,8 +25,13 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
+        private readonly IConfiguration configuration;
+        //private readonly IHttpClientFactory _clientFactory;
+        
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
-            ILogger<LoginModel> logger, 
+            ILogger<LoginModel> logger,
+            IConfiguration configuration,
+            //IHttpClientFactory clientFactory,
             ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context,
             UserManager<ApplicationUser> userManager)
         {
@@ -31,6 +39,8 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _context = context;
+            this.configuration = configuration;
+            //_clientFactory = clientFactory;
         }
 
         [BindProperty]
@@ -76,6 +86,37 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            //string recaptchaResponse = this.Request.Form["g-recaptcha-response"];
+            //var client = _clientFactory.CreateClient();
+            //try
+            //{
+            //    var parameters = new Dictionary<string, string>
+            //{
+            //    {"secret", this.configuration["reCAPTCHA:SecretKey"]},
+            //    {"response", recaptchaResponse},
+            //    {"remoteip", this.HttpContext.Connection.RemoteIpAddress.ToString()}
+            //};
+
+            //    HttpResponseMessage response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(parameters));
+            //    response.EnsureSuccessStatusCode();
+
+            //    string apiResponse = await response.Content.ReadAsStringAsync();
+            //    dynamic apiJson = JObject.Parse(apiResponse);
+            //    if (apiJson.success != true)
+            //    {
+            //        this.ModelState.AddModelError(string.Empty, "There was an unexpected problem processing this request. Please try again.");
+            //    }
+            //}
+            //catch (HttpRequestException ex)
+            //{
+            //    // Something went wrong with the API. Let the request through.
+            //    _logger.LogError(ex, "Unexpected error calling reCAPTCHA api.");
+            //}
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
