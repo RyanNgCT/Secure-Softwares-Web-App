@@ -15,7 +15,7 @@ using ssd_assignment_team1_draft1.Models;
 namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public abstract class ResendEmailConfirmationModel : PageModel
+    public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
