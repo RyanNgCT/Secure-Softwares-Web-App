@@ -12,7 +12,7 @@ namespace ssd_assignment_team1_draft1.Models
         public int Audit_ID { get; set; }
 
         [Display(Name = "Audit Action")]
-        [StringLength(100,MinimumLength = 5)]
+        [StringLength(150,MinimumLength = 5)]
         [Required]
         public string AuditActionType { get; set; }
 

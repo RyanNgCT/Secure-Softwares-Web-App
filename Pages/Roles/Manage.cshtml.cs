@@ -92,7 +92,8 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
             {
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Allocated a Role (Username: " + selectedusername.ToString() + " Role: " + selectedrolename.ToString() + ")";
+                auditrecord.AuditActionType = "Allocated a Role";
+                    //" (Username: " + selectedusername.ToString() + " Role: " + selectedrolename.ToString() + ")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = 0;
                 // Get current logged-in user
@@ -124,7 +125,8 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Deallocated a Role (Username: " + delusername.ToString() + " Role: " + delrolename.ToString() + ")";
+                auditrecord.AuditActionType = "Deallocated a Role";
+                   // " (Username: " + delusername.ToString() + " Role: " + delrolename.ToString() + ")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = 0;
                 // Get current logged-in user
