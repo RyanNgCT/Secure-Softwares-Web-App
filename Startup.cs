@@ -66,6 +66,7 @@ namespace ssd_assignment_team1_draft1
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             });
 
             services.AddAuthentication()

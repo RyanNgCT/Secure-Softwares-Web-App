@@ -61,6 +61,8 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [RegularExpression(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$", ErrorMessage = "Please enter valid email.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -70,11 +72,13 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
             [Display(Name = "Full Name")]
             public string FullName { get; set; }
 
