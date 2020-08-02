@@ -87,12 +87,14 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
             ApplicationRole AppRole = await _roleManager.FindByNameAsync(selectedrolename);
 
             IdentityResult roleResult = await _userManager.AddToRoleAsync(AppUser, AppRole.Name);
-
+            
             if (roleResult.Succeeded)
             {
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Allocated a Role";
+                string u = selectedusername;
+                string r = selectedrolename;
+                auditrecord.AuditActionType = "Allocated a Role (User:"+u+" Role:"+r+")";
                     //" (Username: " + selectedusername.ToString() + " Role: " + selectedrolename.ToString() + ")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = 0;
@@ -125,7 +127,9 @@ namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Deallocated a Role";
+                string u = delusername;
+                string r = delrolename;
+                auditrecord.AuditActionType = "Deallocated a Role (User:" + u + " Role:" + r + ")";
                    // " (Username: " + delusername.ToString() + " Role: " + delrolename.ToString() + ")";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeySoftwareFieldID = 0;

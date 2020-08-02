@@ -10,7 +10,7 @@ namespace ssd_assignment_team1_draft1.Models
     public class Software
     {
         public int ID { get; set; }
-        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid name.")]
         [Required]
         public string Name { get; set; }
 
