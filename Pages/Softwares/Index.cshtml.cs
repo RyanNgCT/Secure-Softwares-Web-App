@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Data;
 using ssd_assignment_team1_draft1.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1
 {
+    [Authorize(Roles = "Admin, Software_Admin, User")]
     public class IndexModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
