@@ -11,7 +11,7 @@ using ssd_assignment_team1_draft1.Models;
 
 namespace ssd_assignment_team1_draft1.Pages.Audit
 {
-    [Authorize(Roles = "Admin, Auditor")]
+    [Authorize(Roles = "Auditor")]
     public class CreateModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;

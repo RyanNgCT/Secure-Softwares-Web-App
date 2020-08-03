@@ -68,6 +68,21 @@ namespace ssd_assignment_team1_draft1
                 options.User.RequireUniqueEmail = true;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                // options.Cookie.Name = "YourCookieName";
+                //  options.Cookie.Domain=
+                // options.LoginPath = "/Account/Login";
+                // options.LogoutPath = "/Account/Logout";
+                // options.AccessDeniedPath = "/Account/AccessDenied";
+
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(300);
+                options.SlidingExpiration = true;
+
+            });
+
+
 
             services.AddAuthentication()
         .AddGoogle(options =>
