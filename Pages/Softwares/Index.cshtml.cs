@@ -9,9 +9,11 @@ using ssd_assignment_team1_draft1.Data;
 using ssd_assignment_team1_draft1.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1
 {
+    [Authorize(Roles = "Admin, Software_Admin, User, Auditor")]
     public class IndexModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;

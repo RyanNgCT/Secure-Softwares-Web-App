@@ -67,7 +67,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -80,6 +80,8 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Full Name")]
+            //https://stackoverflow.com/questions/35392798/regex-to-validate-full-name-having-atleast-four-characters
+            [RegularExpression(@"^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}$", ErrorMessage = "Please enter valid name with at least 3 alphabets.")]
             public string FullName { get; set; }
 
         }
