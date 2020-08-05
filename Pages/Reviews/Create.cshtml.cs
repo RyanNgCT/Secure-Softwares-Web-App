@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Data;
 using ssd_assignment_team1_draft1.Models;
 
@@ -18,17 +19,19 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
         {
             _context = context;
         }
-
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
+        
+        public IList<Software> Softwares { get; set; }
+        
         [BindProperty]
         public Review Review { get; set; }
+        public Software Software { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task OnGetAsync()
+        {
+            Softwares = await _context.Software.ToListAsync();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

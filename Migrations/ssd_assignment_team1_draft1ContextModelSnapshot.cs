@@ -242,8 +242,8 @@ namespace ssd_assignment_team1_draft1.Migrations
 
                     b.Property<string>("AuditActionType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(70)")
-                        .HasMaxLength(70);
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<DateTime>("DateTimeStamp")
                         .HasColumnType("datetime2");
@@ -253,8 +253,8 @@ namespace ssd_assignment_team1_draft1.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Audit_ID");
 
@@ -277,11 +277,8 @@ namespace ssd_assignment_team1_draft1.Migrations
                     b.Property<decimal>("Ratings")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SoftwareName")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("SoftwareName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
@@ -309,11 +306,20 @@ namespace ssd_assignment_team1_draft1.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Ratings")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SerialNumber")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("WarrantyPeriod")
                         .HasColumnType("int");

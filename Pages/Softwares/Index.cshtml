@@ -39,11 +39,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Software[0].WarrantyPeriod)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Software[0].Ratings)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Software) {
+@foreach (var item in Model.Software)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -63,12 +67,33 @@
             <td>
                 @Html.DisplayFor(modelItem => item.WarrantyPeriod)
             </td>
+
+            @{ decimal total = 0;
+                int count = 0;
+                foreach (var i in Model.Reviews)
+                {
+
+                    if (i.SoftwareName == item.Name)
+                    {
+                        total = total + i.Ratings;
+                        count++;
+                    }
+                }
+                item.Ratings = Convert.ToDouble(total) / count;
+            }
+            <td>
+                @item.Ratings.ToString("0.00")
+            </td>
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
+                <a asp-page="./Payment" asp-route-id="@item.ID">Buy Now</a> |
             </td>
         </tr>
+
+
 }
     </tbody>
 </table>

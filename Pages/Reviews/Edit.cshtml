@@ -16,7 +16,12 @@
             <input type="hidden" asp-for="Review.ID" />
             <div class="form-group">
                 <label asp-for="Review.SoftwareName" class="control-label"></label>
-                <input asp-for="Review.SoftwareName" class="form-control" />
+                <select asp-for="Review.SoftwareName" class="form-control">
+                    @foreach (var item in Model.Softwares)
+                    {
+                        <option>@Html.DisplayFor(modelItem => item.Name)</option>
+                    }
+                </select>
                 <span asp-validation-for="Review.SoftwareName" class="text-danger"></span>
             </div>
             <div class="form-group">
