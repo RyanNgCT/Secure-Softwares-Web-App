@@ -306,11 +306,20 @@ namespace ssd_assignment_team1_draft1.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Ratings")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SerialNumber")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("WarrantyPeriod")
                         .HasColumnType("int");

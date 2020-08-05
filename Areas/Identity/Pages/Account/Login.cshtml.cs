@@ -62,6 +62,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [StringLength(50, ErrorMessage = "The {0} used are at least {2} and at max {1} characters long.", MinimumLength = 8)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

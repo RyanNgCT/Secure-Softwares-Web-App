@@ -24,7 +24,12 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
 
         [BindProperty]
         public Review Review { get; set; }
+        public IList<Software> Softwares { get; set; }
 
+        public async Task OnGetAsync()
+        {
+            Softwares = await _context.Software.ToListAsync();
+        }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -49,6 +54,8 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
             {
                 return Page();
             }
+            Review.Username = User.Identity.Name;
+            Review.DateCreated = DateTime.Now;
 
             _context.Attach(Review).State = EntityState.Modified;
 

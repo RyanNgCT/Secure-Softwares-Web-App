@@ -22,10 +22,17 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
         }
 
         public IList<Review> Review { get;set; }
-
+        public string searchReviews { get; set; }
         public async Task OnGetAsync()
         {
-            Review = await _context.Review.ToListAsync();
+            var reviews = from r in _context.Review
+                          select r;
+            if (!string.IsNullOrEmpty(searchReviews))
+            {
+                reviews = reviews.Where(r => r.SoftwareName.Contains(searchReviews));
+            }
+
+            Review = await  reviews.ToListAsync();
         }
     }
 }

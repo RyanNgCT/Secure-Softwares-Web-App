@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ssd_assignment_team1_draft1.Data;
 using ssd_assignment_team1_draft1.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1
@@ -23,7 +24,8 @@ namespace ssd_assignment_team1_draft1
         }
 
         public IList<Software> Software { get;set; }
-        
+        public IList<Review> Reviews { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string SearchSoftware { get; set; }
 
@@ -38,6 +40,7 @@ namespace ssd_assignment_team1_draft1
 
             Software = await softwares.ToListAsync();
             //Software = await _context.Software.ToListAsync();
+            Reviews = await _context.Review.ToListAsync();
         }
     }
 }

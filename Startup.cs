@@ -67,7 +67,6 @@ namespace ssd_assignment_team1_draft1
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             });
             services.ConfigureApplicationCookie(options =>
             {
@@ -78,7 +77,7 @@ namespace ssd_assignment_team1_draft1
                 // options.AccessDeniedPath = "/Account/AccessDenied";
 
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(300);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(300); // 5 mins lockout
                 options.SlidingExpiration = true;
 
             });
