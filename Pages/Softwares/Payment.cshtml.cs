@@ -74,8 +74,8 @@ namespace ssd_assignment_team1_draft1
                 using (var smtp = new SmtpClient())
                 {
                     smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtp.EnableSsl = true;
-                    smtp.PickupDirectoryLocation = @"d:\mailpickup";
+                    //smtp.EnableSsl = true;
+                    smtp.PickupDirectoryLocation = @"c:\mailpickup";
                     var message = new MailMessage();
                     message.To.Add(OrderEmail);
                     message.Subject = "Buying Software - New Order";
