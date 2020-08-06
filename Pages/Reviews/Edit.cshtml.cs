@@ -27,10 +27,6 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
         public Review Review { get; set; }
         public IList<Software> Softwares { get; set; }
 
-        //public async Task OnGetAsync()
-        //{
-        //    Softwares = await _context.Software.ToListAsync();
-        //}
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -40,6 +36,7 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
 
             Review = await _context.Review.FirstOrDefaultAsync(m => m.ID == id);
             Softwares = await _context.Software.ToListAsync();
+
             if (Review == null)
             {
                 return NotFound();

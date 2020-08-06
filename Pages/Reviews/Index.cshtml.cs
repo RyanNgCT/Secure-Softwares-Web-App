@@ -22,7 +22,9 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
         }
 
         public IList<Review> Review { get;set; }
+        [BindProperty(SupportsGet = true)]
         public string searchReviews { get; set; }
+
         public async Task OnGetAsync()
         {
             var reviews = from r in _context.Review
@@ -32,7 +34,7 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
                 reviews = reviews.Where(r => r.SoftwareName.Contains(searchReviews));
             }
 
-            Review = await  reviews.ToListAsync();
+            Review = await reviews.ToListAsync();
         }
     }
 }

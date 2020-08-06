@@ -17,7 +17,7 @@ using System.Text;
 
 namespace ssd_assignment_team1_draft1
 {
-    public class PaymentModel : PageModel
+    public class PaymentModel : PageModel 
     {
 
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
@@ -29,8 +29,6 @@ namespace ssd_assignment_team1_draft1
         public Software Software { get; set; }
 
         public int Id { get; set; }
-
-        [BindProperty, EmailAddress, Required, Display(Name = "Your Email Address")]
         public string OrderEmail { get; set; }
         [BindProperty, Required(ErrorMessage = "Please supply a Credit Card Number"), Display(Name = "Credit Card Number")]
         public string CreditNumber { get; set; }
@@ -55,6 +53,7 @@ namespace ssd_assignment_team1_draft1
 
             if (ModelState.IsValid)
             {
+                OrderEmail = User.Identity.Name;
                 int i = 0;
                 List<string> keys = new List<string>();
                 while (i < OrderQuantity)
@@ -74,8 +73,7 @@ namespace ssd_assignment_team1_draft1
                 using (var smtp = new SmtpClient())
                 {
                     smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    //smtp.EnableSsl = true;
-                    smtp.PickupDirectoryLocation = @"c:\mailpickup";
+                    smtp.PickupDirectoryLocation = @"d:\mailpickup";
                     var message = new MailMessage();
                     message.To.Add(OrderEmail);
                     message.Subject = "Buying Software - New Order";
