@@ -11,7 +11,7 @@ namespace ssd_assignment_team1_draft1.Models
     {
 
         public string Description { get; set; }
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "The description contains inputs which are not valid.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "The description contains inputs which are invalid.")]
         public DateTime CreatedDate { get; set; }
         public string IPAddress { get; set; }
     }
