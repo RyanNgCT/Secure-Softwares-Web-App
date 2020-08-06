@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 {
-   //[Authorize(Roles = "Admin")]
+   [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
