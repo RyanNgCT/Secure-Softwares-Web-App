@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using ssd_assignment_team1_draft1.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
@@ -28,7 +29,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration configuration;
         private readonly ILogger<RegisterModel> _logger;
-        //private readonly IHttpClientFactory _httpclientfactory;
+        private readonly IHttpClientFactory _clientfactory;
         private readonly IEmailSender _emailSender;
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
@@ -38,7 +39,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IConfiguration configuration,
             IEmailSender emailSender,
-            //IHttpClientFactory httpClientFactory,
+            IHttpClientFactory clientFactory,
             ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _userManager = userManager;
@@ -47,7 +48,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             this.configuration = configuration;
             _emailSender = emailSender;
             _context = context;
-            //_httpclientfactory = httpClientFactory;
+            _clientfactory = clientFactory;
         }
 
         [BindProperty]
@@ -136,6 +137,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, "User");
 
                     // Registration successful - create an audit record
                     var auditrecord = new AuditRecord();
