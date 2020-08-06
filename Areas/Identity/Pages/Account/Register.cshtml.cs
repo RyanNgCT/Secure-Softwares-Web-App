@@ -96,35 +96,35 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             //string recaptchaResponse = this.Request.Form["g-recaptcha-response"];
-            //var client = _httpclientfactory.CreateClient();
+            //var client = _clientfactory.CreateClient();
             //try
             //{
-              //  var parameters = new Dictionary<string, string>
+            //    var parameters = new Dictionary<string, string>
             //{
-              //  {"secret", this.configuration["reCAPTCHA:SecretKey"]},
-               // {"response", recaptchaResponse},
-                //{"remoteip", this.HttpContext.Connection.RemoteIpAddress.ToString()}
+            //    {"secret", this.configuration["reCAPTCHA:SecretKey"]},
+            //    {"response", recaptchaResponse},
+            //    {"remoteip", this.HttpContext.Connection.RemoteIpAddress.ToString()}
             //};
 
-              //  HttpResponseMessage response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(parameters));
-                //response.EnsureSuccessStatusCode();
+            //    HttpResponseMessage response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(parameters));
+            //    response.EnsureSuccessStatusCode();
 
-                //string apiResponse = await response.Content.ReadAsStringAsync();
-                //dynamic apiJson = JObject.Parse(apiResponse);
-                //if (apiJson.success != true)
-                //{
-                  //  this.ModelState.AddModelError(string.Empty, "There was an unexpected problem processing this request. Please try again.");
-                //}
+            //    string apiResponse = await response.Content.ReadAsStringAsync();
+            //    dynamic apiJson = JObject.Parse(apiResponse);
+            //    if (apiJson.success != true)
+            //    {
+            //        this.ModelState.AddModelError(string.Empty, "There was an unexpected problem processing this request. Please try again.");
+            //    }
             //}
             //catch (HttpRequestException ex)
             //{
-                // Something went wrong with the API. Let the request through.
-              //  _logger.LogError(ex, "Unexpected error calling reCAPTCHA api.");
+            //     //Something went wrong with the API. Let the request through.
+            //    _logger.LogError(ex, "Unexpected error calling reCAPTCHA api.");
             //}
 
             //if (!ModelState.IsValid)
             //{
-              //  return Page();
+            //    return Page();
             //}
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
