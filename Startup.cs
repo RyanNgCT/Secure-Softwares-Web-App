@@ -31,8 +31,6 @@ namespace ssd_assignment_team1_draft1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
-
             services.AddRazorPages();
 
             services.AddDbContext<ssd_assignment_team1_draft1Context>(options =>
