@@ -242,8 +242,8 @@ namespace ssd_assignment_team1_draft1.Migrations
 
                     b.Property<string>("AuditActionType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
 
                     b.Property<DateTime>("DateTimeStamp")
                         .HasColumnType("datetime2");
@@ -253,8 +253,8 @@ namespace ssd_assignment_team1_draft1.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Audit_ID");
 
@@ -277,8 +277,11 @@ namespace ssd_assignment_team1_draft1.Migrations
                     b.Property<decimal>("Ratings")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("SoftwareName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SoftwareName")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

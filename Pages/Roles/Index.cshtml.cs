@@ -12,7 +12,7 @@ using ssd_assignment_team1_draft1.Models;
 namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 {
 
-    [Authorize(Roles = "Head Admin")]
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
