@@ -11,7 +11,7 @@ using ssd_assignment_team1_draft1.Models;
 
 namespace ssd_assignment_team1_draft1
 {
-    [Authorize(Roles = "Admin, Software_Admin, User")]
+    [Authorize(Roles = "Software Admin")]
     public class DetailsModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
