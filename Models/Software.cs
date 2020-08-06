@@ -31,7 +31,5 @@ namespace ssd_assignment_team1_draft1.Models
         [Required]
         public int WarrantyPeriod { get; set; }
         public double Ratings { get; set; }
-        public int Quantity { get; set; }
-        public decimal Total { get; set; }
     }
 }
