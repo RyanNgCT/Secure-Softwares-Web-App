@@ -17,7 +17,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using ssd_assignment_team1_draft1.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
@@ -29,7 +28,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration configuration;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IHttpClientFactory _clientfactory;
+        //private readonly IHttpClientFactory _httpclientfactory;
         private readonly IEmailSender _emailSender;
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
 
@@ -39,7 +38,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IConfiguration configuration,
             IEmailSender emailSender,
-            IHttpClientFactory clientFactory,
+            //IHttpClientFactory httpClientFactory,
             ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context context)
         {
             _userManager = userManager;
@@ -48,7 +47,7 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
             this.configuration = configuration;
             _emailSender = emailSender;
             _context = context;
-            _clientfactory = clientFactory;
+            //_httpclientfactory = httpClientFactory;
         }
 
         [BindProperty]
