@@ -52,6 +52,20 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
             if (Review != null)
             {
                 _context.Review.Remove(Review);
+
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Deleted a Review";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeySoftwareFieldID = 0;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+
+                _context.AuditRecords.Add(auditrecord);
+
+
+                await _context.SaveChangesAsync();
+
                 await _context.SaveChangesAsync();
             }
 
