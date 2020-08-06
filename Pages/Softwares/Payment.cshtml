@@ -27,7 +27,8 @@
     </div>
     <div class="form-group">
         <label asp-for="OrderEmail"></label>
-        <input asp-for="OrderEmail" class="form-control form-control-sm" required>
+        OrderEmail = @Model.User.Identity.Name
+        <p>@Model.User.Identity.Name</p>
         <span asp-validation-for="OrderEmail"></span>
     </div>
     <div class="form-group">
