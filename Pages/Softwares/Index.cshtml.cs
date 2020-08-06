@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1
 {
-    //[Authorize(Roles = "Admin, Software_Admin, User, Auditor")]
+    [Authorize(Roles = "Head Admin, Software Admin, Review Admin, User, Auditor")]
     public class IndexModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;
