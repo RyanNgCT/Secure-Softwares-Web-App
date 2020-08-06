@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ssd_assignment_team1_draft1.Pages.Softwares.Roles
 {
-    //[Authorize(Roles = "Head Admin")]
+    [Authorize(Roles = "Admin")]
     public class ManageModel : PageModel
     {
         private readonly ssd_assignment_team1_draft1.Data.ssd_assignment_team1_draft1Context _context;

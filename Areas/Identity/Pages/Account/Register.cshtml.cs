@@ -137,8 +137,6 @@ namespace ssd_assignment_team1_draft1.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, "User");
-
                     // Registration successful - create an audit record
                     var auditrecord = new AuditRecord();
                     auditrecord.AuditActionType = "Register Account";
