@@ -44,7 +44,7 @@
         </dd>
     </dl>
     
-    <form method="post">
+    <form method="post" asp-antiforgery="true">
         <input type="hidden" asp-for="Review.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
