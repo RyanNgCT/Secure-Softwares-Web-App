@@ -83,6 +83,20 @@ namespace ssd_assignment_team1_draft1
                     await smtp.SendMailAsync(message);
                 }
 
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Purchased a Software";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeySoftwareFieldID = 0;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+
+                _context.AuditRecords.Add(auditrecord);
+
+
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToPage("OrderSuccess");
 
             }

@@ -44,6 +44,18 @@ namespace ssd_assignment_team1_draft1.Pages.Reviews
             Review.DateCreated = DateTime.Now;
 
             _context.Review.Add(Review);
+
+            var auditrecord = new AuditRecord();
+            auditrecord.AuditActionType = "Added a Review";
+            auditrecord.DateTimeStamp = DateTime.Now;
+            auditrecord.KeySoftwareFieldID = 0;
+            // Get current logged-in user
+            var userID = User.Identity.Name.ToString();
+            auditrecord.Username = userID;
+
+            _context.AuditRecords.Add(auditrecord);
+
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

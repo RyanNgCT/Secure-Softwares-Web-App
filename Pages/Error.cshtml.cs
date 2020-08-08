@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace ssd_assignment_team1_draft1.Pages
 {
@@ -14,6 +15,9 @@ namespace ssd_assignment_team1_draft1.Pages
     {
         public string RequestId { get; set; }
 
+        public int iStatusCode { get; set; }
+        public string Message { get; set; }
+        public string StackTrace { get; set; }
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         private readonly ILogger<ErrorModel> _logger;
@@ -26,6 +30,13 @@ namespace ssd_assignment_team1_draft1.Pages
         public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+            var exception = HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+            iStatusCode = HttpContext.Response.StatusCode;
+            Message = exception.Error.Message;
+            StackTrace = exception.Error.StackTrace;
+
         }
     }
 }
