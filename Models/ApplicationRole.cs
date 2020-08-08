@@ -9,7 +9,7 @@ namespace ssd_assignment_team1_draft1.Models
 {
     public class ApplicationRole : IdentityRole
     {
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "The description contains inputs which are not valid.")]
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "The description contains characters which are not valid.")]
         public string Description { get; set; }
         
         public DateTime CreatedDate { get; set; }
