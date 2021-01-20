@@ -19,7 +19,7 @@ git clone https://github.com/RyanNgCT/Secure-Softwares-Web-App.git
 
 | Name    | Features                                                                                                                                                       |Done?| 
 |---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------|
-| Ryan    | Authentication, Login, Registration 2FA Email Confirmation & Password Reset Sign in with Google Privacy Policy                                                 | ✔️  |
-| Kai Zer | Authorization Roles management Create various admin roles and User role Give every new registered account the User role CAPTCHA in registration and login page | ✔️  | 
-| Ray Son | CRUD Database (Software Products Page) Auditing Error Management Session Management                                                                            | ✔️  |  
-| Gerald  | Review Page Checkout Page                                                                                                                                      | ✔️  |  
+| Ryan    | Authentication, Login, Registration 2FA, Email Confirmation & Password Reset, Sign in with Google, Privacy Policy                                                 | ✔️  |
+| Kai Zer | Authorization, Roles management--Create various admin roles and User role Give every new registered account the User role, CAPTCHA in registration and login page | ✔️  | 
+| Ray Son | CRUD Database (Software Products Page), Auditin,g Error Management & Session Management                                                                            | ✔️  |  
+| Gerald  | Review Page, Checkout Page                                                                                                                                      | ✔️  |  
