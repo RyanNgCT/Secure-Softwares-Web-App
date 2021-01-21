@@ -7,13 +7,14 @@ In this project, we aim to create a web application that sells software products
 [Notes by devs](https://docs.google.com/document/d/1SxIXTsnp0RhG702WcIClbmqBboJuLbTKRk2pcdqdYdo/edit?usp=sharing) on local webapp usage.
 
 ## Requirements
-- Microsoft Visual Studio
+- Microsoft Visual Studio > 16.0
 - IIS Express Server
 - Code in this repo
+- ASP .NET Core **3.1**
 ```
 git clone https://github.com/RyanNgCT/Secure-Softwares-Web-App.git
 ```
-
+- Create your own API keys for Email (Sendgrid), Captcha and Google Authentication in `secrets.json`. [Tutorial](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows)
 
 ## Features
 
