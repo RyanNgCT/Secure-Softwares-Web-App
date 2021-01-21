@@ -9,12 +9,14 @@ In this project, we aim to create a web application that sells software products
 ## Requirements
 - Microsoft Visual Studio > 16.0
 - IIS Express Server
+- ASP .NET Core __3.1__
+- Create your own API keys for Email (Sendgrid), Captcha and Google Authentication in `secrets.json`. [Tutorial](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows) on this topic.
 - Code in this repo
-- ASP .NET Core **3.1**
+
 ```
 git clone https://github.com/RyanNgCT/Secure-Softwares-Web-App.git
 ```
-- Create your own API keys for Email (Sendgrid), Captcha and Google Authentication in `secrets.json`. [Tutorial](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows)
+
 
 ## Features
 
